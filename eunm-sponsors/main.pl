@@ -9,6 +9,7 @@ use LWP::UserAgent;
 use Data::Dumper;
 use WWW::Mechanize;
 
+# 文字列を抜き出します。
 sub _between {
 
 	my ($source, $begin, $end) = @_;
@@ -36,7 +37,7 @@ sub _between {
 	return $source;
 }
 
-# ファイル作成
+# ファイルを作成します。
 sub _create_text_file {
 	my ($path, $content) = @_;
 
@@ -47,7 +48,7 @@ sub _create_text_file {
 	close($stream);
 }
 
-# スポンサーページをダウンロードする
+# スポンサーページをリクエストします。
 sub _query_sponsors {
 
 	my $session = WWW::Mechanize->new();
@@ -55,8 +56,8 @@ sub _query_sponsors {
 
 	# ========== ログインを試みる ==========
 	my $form = {};
-	$form->{username} = 'irisawamasaru';
-	$form->{password} = 'Hello,fortee!!!!';
+	$form->{username} = '';
+	$form->{password} = '';
 	my $result = $session->submit_form(
 		fields => $form
 	);
@@ -106,6 +107,7 @@ sub _diagnose_sponsors {
 	close($stream);
 }
 
+# スポンサーページをダウンロードします。
 sub _download_sponsor_page_as {
 
 	my ($path) = @_;
@@ -120,6 +122,7 @@ sub _download_sponsor_page_as {
 	return $path;
 }
 
+# エントリーポイント
 sub _main {
 
 	binmode(STDIN,  ':utf8');
